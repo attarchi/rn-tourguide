@@ -140,14 +140,19 @@ export const TourGuideProvider = ({
     })
   }
 
-  const setCurrentStep = async (key: string, step?: IStep) =>
-    new Promise<void>(async (resolve) => {
-      if (scrollRef && step) {
+  const setCurrentStep = async (
+    key: string,
+    step?: IStep,
+    localScrollRef?: React.RefObject<any>,
+  ) => {
+    const actualScrollRef = scrollRef ?? localScrollRef
+    return await new Promise<void>(async (resolve) => {
+      if (actualScrollRef && step) {
         await step.wrapper.measureLayout(
-          findNodeHandle(scrollRef.current),
+          findNodeHandle(actualScrollRef.current),
           (_x: number, y: number, _w: number, h: number) => {
             const yOffsett = y > 0 ? y - h / 2 : 0
-            scrollRef.current.scrollTo({ y: yOffsett, animated: false })
+            actualScrollRef.current.scrollTo({ y: yOffsett, animated: true })
           },
         )
         setTimeout(() => {
@@ -158,9 +163,8 @@ export const TourGuideProvider = ({
             return newStep
           })
           resolve()
-        }, 100);
-      }
-      else {
+        }, 100)
+      } else {
         updateCurrentStep((currentStep) => {
           const newStep = { ...currentStep }
           newStep[key] = step
@@ -169,8 +173,8 @@ export const TourGuideProvider = ({
         })
         resolve()
       }
-      
     })
+  }
 
   const getNextStep = (
     key: string,
@@ -261,7 +265,7 @@ export const TourGuideProvider = ({
       requestAnimationFrame(() => start(key, fromStep))
     } else {
       eventEmitter[key]?.emit('start')
-      await setCurrentStep(key, currentStep!)
+      await setCurrentStep(key, currentStep, _scrollRef)
       setVisible(key, true)
       startTries.current = 0
     }

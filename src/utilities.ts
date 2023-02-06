@@ -54,10 +54,8 @@ const getCanvasPath = memoize((path: string) => {
   return ''
 })
 
-const getBorderRadiusOrDefault = (
-  borderRadius?: number,
-  defaultRadius: number = 0,
-) => (borderRadius || borderRadius === 0 ? borderRadius : defaultRadius)
+const getBorderRadiusOrDefault = (borderRadius?: number, defaultRadius = 0) =>
+  borderRadius || borderRadius === 0 ? borderRadius : defaultRadius
 
 export const defaultSvgPath = ({
   size,
@@ -122,7 +120,7 @@ export const circleSvgPath = ({
   ].join('')
 }
 
-const sizeOffset = memoize((size: ValueXY, maskOffset: number = 0) =>
+const sizeOffset = memoize((size: ValueXY, maskOffset = 0) =>
   maskOffset
     ? {
         x: size.x + maskOffset,
@@ -131,7 +129,7 @@ const sizeOffset = memoize((size: ValueXY, maskOffset: number = 0) =>
     : size,
 )
 
-const positionOffset = memoize((position: ValueXY, maskOffset: number = 0) =>
+const positionOffset = memoize((position: ValueXY, maskOffset = 0) =>
   maskOffset
     ? {
         x: position.x - maskOffset / 2,
@@ -164,8 +162,8 @@ const getInterpolator = memoize(
     shape: Shape,
     position: ValueXY,
     size: ValueXY,
-    maskOffset: number = 0,
-    borderRadius: number = 0,
+    maskOffset = 0,
+    borderRadius = 0,
     borderRadiusObject?: BorderRadiusObject,
   ) => {
     const options = {
