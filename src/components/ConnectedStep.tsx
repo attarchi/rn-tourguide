@@ -19,6 +19,7 @@ interface Props {
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number,
   withoutButtons?: boolean,
+  pressable?: boolean,
 }
 
 export class ConnectedStep extends React.Component<Props> {

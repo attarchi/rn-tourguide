@@ -187,6 +187,7 @@ interface TourGuideZoneProps {
   tooltipBottomOffset?: number
   children: React.ReactNode,
   withoutButtons?: boolean,
+  pressable?: boolean,
 }
 
 type Shape = 'circle' | 'rectangle' | 'circle_and_keep' | 'rectangle_and_keep'

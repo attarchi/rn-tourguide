@@ -17,6 +17,7 @@ interface Props {
   tooltipBottomOffset?: number
   borderRadiusObject?: BorderRadiusObject,
   withoutButtons?: boolean,
+  pressable?: boolean,
 }
 
 export const Step = (props: Props) => {

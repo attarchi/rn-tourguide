@@ -14,6 +14,7 @@ import { BorderRadiusObject, IStep, Labels, ValueXY } from '../types'
 import styles, { MARGIN } from './style'
 import { SvgMask } from './SvgMask'
 import { Tooltip, TooltipProps } from './Tooltip'
+import { NonInteractionPlaceholder } from './NonInteractionPlaceholder'
 
 declare var __TEST__: boolean
 
@@ -284,8 +285,6 @@ export class Modal extends React.Component<ModalProps, State> {
       currentStep={this.props.currentStep}
       maskOffset={this.props.maskOffset}
       borderRadius={this.props.borderRadius}
-      dismissOnPress={this.props.dismissOnPress}
-      stop={this.props.stop}
     />
   )
 
@@ -326,11 +325,17 @@ export class Modal extends React.Component<ModalProps, State> {
   }
 
   renderNonInteractionPlaceholder() {
-    return this.props.preventOutsideInteraction ? (
-      <View
-        style={[StyleSheet.absoluteFill, styles.nonInteractionPlaceholder]}
+    return (
+      <NonInteractionPlaceholder
+        size={this.state.size!}
+        position={this.state.position!}
+        currentStep={this.props.currentStep}
+        maskOffset={this.props.maskOffset}
+        dismissOnPress={this.props.dismissOnPress}
+        stop={this.props.stop}
+        preventOutsideInteraction={this.props.preventOutsideInteraction}
       />
-    ) : null
+    )
   }
 
   render() {

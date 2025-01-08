@@ -22,7 +22,7 @@ const uri =
 // Add <TourGuideProvider/> at the root of you app!
 function App() {
   return (
-    <TourGuideProvider {...{ borderRadius: 16, androidStatusBarVisible: true }} preventOutsideInteraction>
+    <TourGuideProvider {...{ borderRadius: 16, androidStatusBarVisible: true }} preventOutsideInteraction dismissOnPress >
       <AppContent />
     </TourGuideProvider>
   )
@@ -125,7 +125,7 @@ const AppContent = () => {
           <Text style={styles.buttonText}>START THE TUTORIAL!</Text>
         </TouchableOpacity>
 
-        <TourGuideZone zone={3} shape={'rectangle_and_keep'}>
+        <TourGuideZone zone={3} shape={'rectangle_and_keep'} pressable={true} withoutButtons={true}>
           <TouchableOpacity style={styles.button} onPress={() => start(4)}>
             <Text style={styles.buttonText}>Step 4</Text>
           </TouchableOpacity>

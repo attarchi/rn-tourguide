@@ -5,9 +5,9 @@ import {
   Easing,
   LayoutChangeEvent,
   Platform,
-  Pressable,
   ScaledSize,
   StyleProp,
+  View,
   ViewStyle,
 } from 'react-native'
 import Svg, { PathProps } from 'react-native-svg'
@@ -21,12 +21,10 @@ interface Props {
   style: StyleProp<ViewStyle>
   animationDuration?: number
   backdropColor: string
-  dismissOnPress?: boolean
   maskOffset?: number
   borderRadius?: number
   currentStep?: IStep
   easing: (value: number) => number
-  stop: () => void
 }
 
 interface State {
@@ -184,14 +182,12 @@ export class SvgMask extends Component<Props, State> {
     if (!this.state.canvasSize) {
       return null
     }
-    const { dismissOnPress, stop } = this.props
 
     return (
-      <Pressable
+      <View
         style={this.props.style}
         onLayout={this.handleLayout}
-        pointerEvents={dismissOnPress ? undefined : 'none'}
-        onPress={dismissOnPress ? stop : undefined}
+        pointerEvents='none'
       >
         <Svg
           pointerEvents='none'
@@ -207,7 +203,7 @@ export class SvgMask extends Component<Props, State> {
             opacity={this.state.opacity as any}
           />
         </Svg>
-      </Pressable>
+      </View>
     )
   }
 }

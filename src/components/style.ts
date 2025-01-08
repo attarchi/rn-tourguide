@@ -38,6 +38,7 @@ export default StyleSheet.create<IStyle>({
     zIndex: Z_INDEX - 1,
   },
   nonInteractionPlaceholder: {
+    position: 'absolute',
     backgroundColor: 'transparent',
     zIndex: Z_INDEX - 2,
   },
