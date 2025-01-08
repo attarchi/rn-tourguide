@@ -15,7 +15,8 @@ interface Props {
   children: React.ReactNode
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
-  borderRadiusObject?: BorderRadiusObject
+  borderRadiusObject?: BorderRadiusObject,
+  withoutButtons?: boolean,
 }
 
 export const Step = (props: Props) => {

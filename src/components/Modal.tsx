@@ -319,6 +319,7 @@ export class Modal extends React.Component<ModalProps, State> {
           handlePrev={this.handlePrev}
           handleStop={this.handleStop}
           labels={this.props.labels}
+          withoutButtons={!!this.props.currentStep?.withoutButtons}
         />
       </Animated.View>
     )
