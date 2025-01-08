@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BorderRadiusObject, Shape } from '../types'
+import { BorderRadiusObject, IStep, Shape } from '../types'
 import { ConnectedStep } from './ConnectedStep'
 import { TourGuideContext } from './TourGuideContext'
 
@@ -15,9 +15,10 @@ interface Props {
   children: React.ReactNode
   keepTooltipPosition?: boolean
   tooltipBottomOffset?: number
-  borderRadiusObject?: BorderRadiusObject,
-  withoutButtons?: boolean,
-  pressable?: boolean,
+  borderRadiusObject?: BorderRadiusObject
+  withoutButtons?: boolean
+  pressable?: boolean
+  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
 }
 
 export const Step = (props: Props) => {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native'
-import { BorderRadiusObject, Shape } from '../types'
+import { BorderRadiusObject, IStep, Shape } from '../types'
 import { TourGuideZone } from './TourGuideZone'
 
 export interface TourGuideZoneByPositionProps {
@@ -21,6 +21,7 @@ export interface TourGuideZoneByPositionProps {
   text?: string
   withoutButtons?: boolean
   pressable?: boolean
+  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
 }
 
 export const TourGuideZoneByPosition = ({
@@ -41,6 +42,7 @@ export const TourGuideZoneByPosition = ({
   text,
   withoutButtons,
   pressable,
+  onNext,
 }: TourGuideZoneByPositionProps) => {
   if (!isTourGuide) {
     return null
@@ -63,6 +65,7 @@ export const TourGuideZoneByPosition = ({
           text,
           withoutButtons,
           pressable,
+          onNext,
         }}
         style={{
           position: 'absolute',

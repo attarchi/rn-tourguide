@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BorderRadiusObject, Shape } from '../types'
+import { BorderRadiusObject, IStep, Shape } from '../types'
 import { ITourGuideContext } from './TourGuideContext'
 
 declare var __TEST__: boolean
@@ -17,9 +17,10 @@ interface Props {
   borderRadiusObject?: BorderRadiusObject
   borderRadius?: number
   keepTooltipPosition?: boolean
-  tooltipBottomOffset?: number,
-  withoutButtons?: boolean,
-  pressable?: boolean,
+  tooltipBottomOffset?: number
+  withoutButtons?: boolean
+  pressable?: boolean
+  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
 }
 
 export class ConnectedStep extends React.Component<Props> {

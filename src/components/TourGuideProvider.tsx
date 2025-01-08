@@ -207,7 +207,13 @@ export const TourGuideProvider = ({
     return obj
   }, [currentStep])
 
-  const _next = (key: string) => setCurrentStep(key, getNextStep(key)!)
+  const _next = (key: string) => {
+    const nextStep = getNextStep(key)!
+    if (currentStep[key]?.onNext) {
+      currentStep[key]?.onNext(currentStep[key], nextStep)
+    }
+    return setCurrentStep(key, nextStep)
+  }
 
   const _prev = (key: string) => setCurrentStep(key, getPrevStep(key)!)
 
