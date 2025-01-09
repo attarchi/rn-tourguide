@@ -19,11 +19,14 @@ export interface TourGuideZoneProps {
   borderRadiusObject?: BorderRadiusObject
   withoutButtons?: boolean
   pressable?: boolean
-  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onNext?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop' | 'doNothing'
   onPrevious?: (
     currentStep: IStep | undefined,
     nextStep: IStep | undefined,
-  ) => void | 'stop'
+  ) => void | 'stop' | 'doNothing'
 }
 
 export const TourGuideZone = ({

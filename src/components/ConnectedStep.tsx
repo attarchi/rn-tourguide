@@ -20,11 +20,14 @@ interface Props {
   tooltipBottomOffset?: number
   withoutButtons?: boolean
   pressable?: boolean
-  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onNext?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop' | 'doNothing'
   onPrevious?: (
     currentStep: IStep | undefined,
     nextStep: IStep | undefined,
-  ) => void | 'stop'
+  ) => void | 'stop' | 'doNothing'
 }
 
 export class ConnectedStep extends React.Component<Props> {

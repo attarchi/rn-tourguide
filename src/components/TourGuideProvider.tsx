@@ -213,20 +213,28 @@ export const TourGuideProvider = ({
     const nextStep = getNextStep(key)!
     const current = currentStep[key]
     if (current?.onNext) {
-      current.onNext(current, nextStep)
+      const result = current.onNext(current, nextStep)
+      if (result === 'stop') {
+        return _stop(key)
+      } else if (result === 'doNothing') {
+        return
+      }
     }
     return setCurrentStep(key, nextStep)
   }
 
   const _prev = (key: string) => {
-    const PrevStep = getPrevStep(key)!
+    const prevStep = getPrevStep(key)!
     const current = currentStep[key]
     if (current?.onPrevious) {
-      if (current.onPrevious(current, PrevStep) === 'stop') {
+      const result = current.onPrevious(current, prevStep)
+      if (result === 'stop') {
         return _stop(key)
+      } else if (result === 'doNothing') {
+        return
       }
     }
-    return setCurrentStep(key, PrevStep)
+    return setCurrentStep(key, prevStep)
   }
   const _stop = (key: string) => {
     setVisible(key, false)
