@@ -89,9 +89,11 @@ export const TourGuideProvider = ({
   }, [visible])
 
   useEffect(() => {
-    if (visible[tourKey] || currentStep[tourKey]) {
-      moveToCurrentStep(tourKey)
-    }
+    setTimeout(() => {
+      if (visible[tourKey] || currentStep[tourKey]) {
+        moveToCurrentStep(tourKey)
+      }
+    }, 150)
   }, [visible, currentStep])
 
   useEffect(() => {
@@ -152,7 +154,7 @@ export const TourGuideProvider = ({
         await step.wrapper.measureLayout(
           findNodeHandle(actualScrollRef.current),
           (_x: number, y: number, _w: number, h: number) => {
-            const yOffsett = y > 0 ? y - h / 2 : 0
+            const yOffsett = y > 0 ? y - h : 0
             actualScrollRef.current.scrollTo({ y: yOffsett, animated: true })
           },
         )
