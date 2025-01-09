@@ -2,7 +2,7 @@
   "name": "@attarchi/rn-tourguide",
   "version": "3.4.1",
   "description": "Make an interactive step by step tour guide for your react-native app (a rewrite of react-native-copilot)",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "private": false,
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antoniel/rn-tourguide.git"
+    "url": "git+https://github.com/attarchi/rn-tourguide.git"
   },
   "keywords": [
     "react-native",
@@ -82,5 +82,6 @@
     "logkitty": "^0.7.1",
     "mem": "^4.0.0",
     "set-value": "^4.0.1"
-  }
+  },
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
