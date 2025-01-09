@@ -243,7 +243,9 @@ export const TourGuideProvider = ({
 
   const registerStep = (key: string, step: IStep) => {
     setCanStart((obj) => {
-      if (!obj[key]) return obj
+      if (!obj[key]) {
+        return obj
+      }
       const newObj = { ...obj }
       newObj[key] = false
       return newObj
