@@ -20,6 +20,10 @@ export interface TourGuideZoneProps {
   withoutButtons?: boolean
   pressable?: boolean
   onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onPrevious?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop'
 }
 
 export const TourGuideZone = ({
@@ -38,6 +42,7 @@ export const TourGuideZone = ({
   withoutButtons,
   pressable,
   onNext,
+  onPrevious,
 }: TourGuideZoneProps) => {
   if (!isTourGuide) {
     return <>{children}</>
@@ -59,6 +64,7 @@ export const TourGuideZone = ({
         withoutButtons,
         pressable,
         onNext,
+        onPrevious,
       }}
     >
       <Wrapper {...{ style }}>{children}</Wrapper>

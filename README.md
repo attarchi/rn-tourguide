@@ -189,6 +189,7 @@ interface TourGuideZoneProps {
   withoutButtons?: boolean
   pressable?: boolean
   onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onPrevious?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void | 'stop'
 }
 
 type Shape = 'circle' | 'rectangle' | 'circle_and_keep' | 'rectangle_and_keep'

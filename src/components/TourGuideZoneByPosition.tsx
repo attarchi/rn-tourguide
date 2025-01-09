@@ -22,6 +22,10 @@ export interface TourGuideZoneByPositionProps {
   withoutButtons?: boolean
   pressable?: boolean
   onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onPrevious?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop'
 }
 
 export const TourGuideZoneByPosition = ({
@@ -43,6 +47,7 @@ export const TourGuideZoneByPosition = ({
   withoutButtons,
   pressable,
   onNext,
+  onPrevious,
 }: TourGuideZoneByPositionProps) => {
   if (!isTourGuide) {
     return null
@@ -66,6 +71,7 @@ export const TourGuideZoneByPosition = ({
           withoutButtons,
           pressable,
           onNext,
+          onPrevious,
         }}
         style={{
           position: 'absolute',

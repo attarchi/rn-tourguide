@@ -21,6 +21,10 @@ interface Props {
   withoutButtons?: boolean
   pressable?: boolean
   onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onPrevious?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop'
 }
 
 export class ConnectedStep extends React.Component<Props> {

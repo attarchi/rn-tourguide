@@ -20,6 +20,10 @@ export interface IStep {
   withoutButtons?: boolean
   pressable?: boolean
   onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onPrevious?: (
+    currentStep: IStep | undefined,
+    nextStep: IStep | undefined,
+  ) => void | 'stop'
 }
 export interface StepObject {
   [key: string]: IStep
