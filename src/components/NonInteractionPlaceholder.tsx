@@ -7,7 +7,6 @@ import {
   PressableProps,
   ScaledSize,
   StyleSheet,
-  View,
 } from 'react-native'
 import { IStep, ValueXY } from '../types'
 import styles from './style'

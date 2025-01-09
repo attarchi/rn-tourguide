@@ -211,8 +211,9 @@ export const TourGuideProvider = ({
 
   const _next = (key: string) => {
     const nextStep = getNextStep(key)!
-    if (currentStep[key]?.onNext) {
-      currentStep[key]?.onNext(currentStep[key], nextStep)
+    const current = currentStep[key]
+    if (current?.onNext) {
+      current.onNext(current, nextStep)
     }
     return setCurrentStep(key, nextStep)
   }
