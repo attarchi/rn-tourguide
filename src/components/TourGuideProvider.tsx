@@ -213,19 +213,43 @@ export const TourGuideProvider = ({
     const nextStep = getNextStep(key)!
     const current = currentStep[key]
     if (current?.onNext) {
-      current.onNext(current, nextStep)
+      const result = current.onNext(current, nextStep)
+      if (result === 'stop') {
+        return _stop(key)
+      } else if (result === 'doNothing') {
+        return
+      }
     }
     return setCurrentStep(key, nextStep)
   }
 
-  const _prev = (key: string) => setCurrentStep(key, getPrevStep(key)!)
-
+  const _prev = (key: string) => {
+    const prevStep = getPrevStep(key)!
+    const current = currentStep[key]
+    if (current?.onPrevious) {
+      const result = current.onPrevious(current, prevStep)
+      if (result === 'stop') {
+        return _stop(key)
+      } else if (result === 'doNothing') {
+        return
+      }
+    }
+    return setCurrentStep(key, prevStep)
+  }
   const _stop = (key: string) => {
     setVisible(key, false)
     setCurrentStep(key, undefined)
   }
 
   const registerStep = (key: string, step: IStep) => {
+    setCanStart((obj) => {
+      if (!obj[key]) {
+        return obj
+      }
+      const newObj = { ...obj }
+      newObj[key] = false
+      return newObj
+    })
     setSteps((previousSteps) => {
       const newSteps = { ...previousSteps }
       newSteps[key] = {
@@ -259,6 +283,10 @@ export const TourGuideProvider = ({
     fromStep?: number,
     _scrollRef?: React.RefObject<any>,
   ) => {
+    if (!steps[key] || (fromStep && !(steps[key] as StepObject)[fromStep])) {
+      return
+    }
+
     if (!scrollRef) {
       setScrollRef(_scrollRef)
     }

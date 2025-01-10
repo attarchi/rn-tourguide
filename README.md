@@ -188,7 +188,8 @@ interface TourGuideZoneProps {
   children: React.ReactNode
   withoutButtons?: boolean
   pressable?: boolean
-  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void
+  onNext?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void | 'stop' | 'doNothing'
+  onPrevious?: (currentStep: IStep | undefined, nextStep: IStep | undefined) => void | 'stop' | 'doNothing'
 }
 
 type Shape = 'circle' | 'rectangle' | 'circle_and_keep' | 'rectangle_and_keep'
