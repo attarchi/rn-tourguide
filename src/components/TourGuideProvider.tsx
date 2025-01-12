@@ -37,6 +37,7 @@ export interface TourGuideProviderProps {
   children: React.ReactNode
   dismissOnPress?: boolean
   preventOutsideInteraction?: boolean
+  scrollViewTopReserved?: number
 }
 
 export const TourGuideProvider = ({
@@ -54,8 +55,12 @@ export const TourGuideProvider = ({
   startAtMount = false,
   dismissOnPress = false,
   preventOutsideInteraction = false,
+  ...props
 }: TourGuideProviderProps) => {
   const [scrollRef, setScrollRef] = useState<React.RefObject<any>>()
+  const [scrollViewTopReserved, setScrollViewTopReserved] = useState<
+    number | undefined
+  >(props.scrollViewTopReserved)
   const [tourKey, setTourKey] = useState<string | '_default'>('_default')
   const [visible, updateVisible] = useState<Ctx<boolean | undefined>>({
     _default: false,
@@ -154,7 +159,14 @@ export const TourGuideProvider = ({
         await step.wrapper.measureLayout(
           findNodeHandle(actualScrollRef.current),
           (_x: number, y: number, _w: number, h: number) => {
-            const yOffsett = y > 0 ? y - h : 0
+            let yOffsett = y > 0 ? y - h : 0
+            if (scrollViewTopReserved) {
+              if (yOffsett > scrollViewTopReserved) {
+                yOffsett -= scrollViewTopReserved
+              } else {
+                yOffsett = 0
+              }
+            }
             actualScrollRef.current.scrollTo({ y: yOffsett, animated: true })
           },
         )
@@ -311,6 +323,12 @@ export const TourGuideProvider = ({
   const next = () => _next(tourKey)
   const prev = () => _prev(tourKey)
   const stop = () => _stop(tourKey)
+
+  const setScrollView = (_ref: React.RefObject<any>, _topReserved: number) => {
+    setScrollRef(_ref)
+    setScrollViewTopReserved(_topReserved)
+  }
+
   return (
     <View style={[styles.container, wrapperStyle]}>
       <TourGuideContext.Provider
@@ -323,6 +341,7 @@ export const TourGuideProvider = ({
           stop,
           canStart,
           setTourKey,
+          setScrollView,
         }}
       >
         {children}
