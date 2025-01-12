@@ -7,8 +7,15 @@ import {
 } from '../components/TourGuideZoneByPosition'
 
 export const useTourGuideController = (tourKey?: string) => {
-  const { start, canStart, stop, eventEmitter, getCurrentStep, setTourKey } =
-    React.useContext(TourGuideContext)
+  const {
+    start,
+    canStart,
+    stop,
+    eventEmitter,
+    getCurrentStep,
+    setTourKey,
+    setScrollView,
+  } = React.useContext(TourGuideContext)
 
   const key = tourKey ?? '_default'
 
@@ -69,5 +76,6 @@ export const useTourGuideController = (tourKey?: string) => {
     tourKey: key,
     TourGuideZone: KeyedTourGuideZone,
     TourGuideZoneByPosition: KeyedTourGuideZoneByPosition,
+    setScrollView,
   }
 }
