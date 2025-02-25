@@ -153,11 +153,11 @@ export const TourGuideProvider = ({
     step?: IStep,
     localScrollRef?: React.RefObject<any>,
   ) => {
-    const actualScrollRef = scrollRef ?? localScrollRef
+    const actualScrollRef = scrollRef?.current ?? localScrollRef?.current
     return await new Promise<void>(async (resolve) => {
       if (actualScrollRef && step) {
         await step.wrapper.measureLayout(
-          findNodeHandle(actualScrollRef.current),
+          findNodeHandle(actualScrollRef),
           (_x: number, y: number, _w: number, h: number) => {
             let yOffsett = y > 0 ? y - h : 0
             if (scrollViewTopReserved) {
@@ -167,7 +167,7 @@ export const TourGuideProvider = ({
                 yOffsett = 0
               }
             }
-            actualScrollRef.current.scrollTo({ y: yOffsett, animated: true })
+            actualScrollRef.scrollTo({ y: yOffsett, animated: true })
           },
         )
         setTimeout(() => {
