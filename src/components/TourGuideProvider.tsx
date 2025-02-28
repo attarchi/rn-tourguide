@@ -167,7 +167,9 @@ export const TourGuideProvider = ({
                 yOffsett = 0
               }
             }
-            actualScrollRef?.scrollTo({ y: yOffsett, animated: true })
+            if (actualScrollRef) {
+              actualScrollRef.scrollTo({ y: yOffsett, animated: true })
+            }
           },
         )
         setTimeout(() => {
