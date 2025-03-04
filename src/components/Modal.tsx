@@ -346,7 +346,7 @@ export class Modal extends React.Component<ModalProps, State> {
     }
     return (
       <View
-        style={[StyleSheet.absoluteFill, { backgroundColor: 'transparent' }]}
+        style={[StyleSheet.absoluteFill, { backgroundColor: 'transparent', zIndex: 999999999 }]}
         pointerEvents='box-none'
       >
         <View
