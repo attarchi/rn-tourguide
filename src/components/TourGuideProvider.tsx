@@ -167,8 +167,15 @@ export const TourGuideProvider = ({
                 yOffsett = 0
               }
             }
-            if (actualScrollRef && typeof actualScrollRef.scrollTo === 'function') {
-              actualScrollRef.scrollTo({ y: yOffsett, animated: true })
+            if (actualScrollRef) {
+              if (typeof actualScrollRef.scrollTo === 'function') {
+                actualScrollRef.scrollTo({ y: yOffsett, animated: true })
+              } else if (typeof actualScrollRef.scrollToOffset === 'function') {
+                actualScrollRef.scrollToOffset({
+                  offset: yOffsett,
+                  animated: true,
+                })
+              }
             }
           },
         )
